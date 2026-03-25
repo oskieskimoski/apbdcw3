@@ -10,15 +10,11 @@ public class Employee : User
         this.job = job;
     }
 
-    public override String getUserType()
-    
-    {
-        return "Employee";
-    }
+  
 
     public override String ToString()
     {
-        return "Employee: " + name + ", " + surname + ", job: " + job + ", id"  + id;
+        return "Employee: " + name + ", " + surname + ", job: " + job + ", id "  + id;
     }
     
 

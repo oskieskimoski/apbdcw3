@@ -13,13 +13,10 @@ public class Student : User
         this.major = major;
     }
 
-    public override String getUserType()
-    {
-        return "Student";
-    }
+  
 
     public override string ToString()
     {
-        return "Student: " + name + ", " + surname + ", major: " + major + "year: " + year + ", id"  + id;
+        return "Student: " + name + ", " + surname + ", major: " + major + " year: " + year + ", id "  + id;
     }
 }

@@ -11,16 +11,10 @@ public abstract class Equipment
         this.pricePerDayPunish = pricePerDayPunish;
         this.id = id;
     }
-    public float GetPricePerDayPunish()
-    {
-        return pricePerDayPunish;
-    }
+
  
 
-    public int GetId()
-    {
-        return id;
-    }
+  
     public float pricePunish(int days)
     {
         if (days > 5)

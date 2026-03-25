@@ -36,7 +36,7 @@ public class Service
         }
         else
         {
-            equipment.Add(new Laptop(pricePerDayPunish, equipment[equipment.Count-1].GetId() + 1, cpuModel, screeeSize));
+            equipment.Add(new Laptop(pricePerDayPunish, equipment[equipment.Count-1].id + 1, cpuModel, screeeSize));
         }
     }
 
@@ -48,7 +48,7 @@ public class Service
         }
         else
         {
-            equipment.Add(new Camera(pricePerDayPunish,   equipment[equipment.Count-1].GetId() + 1, model, lens));   
+            equipment.Add(new Camera(pricePerDayPunish,   equipment[equipment.Count-1].id + 1, model, lens));   
         }
         
     } public void addProjektor( float pricePerDayPunish,  int resolution, bool batery )
@@ -59,7 +59,7 @@ public class Service
         }
         else
         {
-            equipment.Add(new Projector(pricePerDayPunish, equipment[equipment.Count - 1].GetId() + 1, resolution,
+            equipment.Add(new Projector(pricePerDayPunish, equipment[equipment.Count - 1].id + 1, resolution,
                 batery));
         }
     }
@@ -71,7 +71,7 @@ public class Service
       
         foreach (var user in users) 
         {
-            if (user.getId() == personId)
+            if (user.id == personId)
             {
                 foundUser = user;
                 break;
@@ -79,7 +79,7 @@ public class Service
         }
         foreach (var e in equipment)
         {
-            if (e.GetId() == itemId)
+            if (e.id == itemId)
             {
                 foundEquipment = e;
                 break;
@@ -99,7 +99,7 @@ public class Service
     
         if (foundEquipment.IsRented)
         {
-            Console.WriteLine($"Sprzęt '{foundEquipment.GetId()}' jest już wypożyczony");
+            Console.WriteLine($"Sprzęt '{foundEquipment.id}' jest już wypożyczony");
             return;
         }
         if (!foundUser.canRent())
