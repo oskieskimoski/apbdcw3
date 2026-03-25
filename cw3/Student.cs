@@ -16,5 +16,9 @@ public class Student : User
     {
         return "Student";
     }
-    
+
+    public override string ToString()
+    {
+        return "Student: " + name + ", " + surname + ", major: " + major + "year: " + year + ", id"  + id;
+    }
 }

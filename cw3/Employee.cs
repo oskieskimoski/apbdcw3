@@ -15,4 +15,10 @@ public class Employee : User
         return "Employee";
     }
 
+    public override String ToString()
+    {
+        return "Employee: " + name + ", " + surname + ", job: " + job + ", id"  + id;
+    }
+    
+
 }

@@ -2,11 +2,11 @@ namespace cw3;
 
 public abstract class User
 {
-    private String name { get; set; }
-    private String  surname { get; set; }
-    private int id { get; set; }
+    public String name { get; set; }
+    public String  surname { get; set; }
+    public int id { get; set; }
     public int currRented { get; set; }
-    private int maxRented { get; set; }
+    public int maxRented { get; set; }
 
     public bool canRent()
     {

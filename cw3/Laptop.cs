@@ -10,6 +10,11 @@ public class Laptop : Equipment
         this.cpuModel = cpuModel;
         this.screeeSize = screeeSize;
     }
+
+    public override string ToString()
+    {
+        return "Laptop, cpu model: " + cpuModel + ", screee size: " + screeeSize + ", id: " + id;
+    }
     
     
 }

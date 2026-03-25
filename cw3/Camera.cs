@@ -10,4 +10,9 @@ public class Camera : Equipment
         this.lens = lens;
     }
 
+    public override string ToString()
+    {
+        return "Camera, model: " + model + ", lens: " + lens + ", id: " + id;
+    }
+
 }

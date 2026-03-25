@@ -10,6 +10,9 @@ public class Projector : Equipment
         this.batery = batery;
     }
 
-  
+    public override string ToString()
+    {
+        return "Projector , resolution: " + resolution + ", is portable: " + (batery ? "Yes" : "No") + ", id: " + id;
+    }
 
 }

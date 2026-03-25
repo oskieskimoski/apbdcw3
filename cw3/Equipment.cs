@@ -4,7 +4,8 @@ public abstract class Equipment
 {
     private float pricePerDayPunish;
     public bool IsRented {get; set;}
-    private int id;
+    public int id { get; }
+
     public Equipment(float pricePerDayPunish, int id)
     {
         this.pricePerDayPunish = pricePerDayPunish;

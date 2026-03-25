@@ -105,7 +105,10 @@ public class Service
             Console.WriteLine("Użytkownik przekroczył limit wypożyczeń");
             return;
         }
-        rents.Add(new Rent(foundUser, rentalDate, returnDate, foundEquipment));
+
+        Rent r = new Rent(foundUser, rentalDate, foundEquipment);
+        r.ReturnDate =  returnDate;
+        rents.Add(r);
         foundUser.currRented += 1;
        foundEquipment.IsRented = true;
         Console.WriteLine($"Pomyślnie wypożyczono '{foundEquipment}' dla {foundUser}");
