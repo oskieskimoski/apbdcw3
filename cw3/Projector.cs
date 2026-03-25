@@ -10,4 +10,6 @@ public class Projector : Equipment
         this.batery = batery;
     }
 
+  
+
 }
