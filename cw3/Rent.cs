@@ -3,10 +3,10 @@ namespace cw3;
 public class Rent
 {
 
-    private User user;
-    private DateTime RentDate;
+    public User user { get; }
+    public DateTime RentDate { get; }
     private DateTime ReturnDate;
-    private Equipment rentedEquipment;
+    public Equipment rentedEquipment { get; }
     private bool isReturned;
     
     public Rent(User user, DateTime rentDate, DateTime returnDate, Equipment rentedEquipment)
@@ -19,12 +19,14 @@ public class Rent
 
     public float ReturnEquipment(DateTime currDate)
     {
+        isReturned = true;
         return rentedEquipment.pricePunish(ReturnDate.Day - currDate.Day);
+       
     }
+
+   
     public bool IsReturned()
     {
         return isReturned;
     }
-    
-    
 }
