@@ -13,6 +13,7 @@ public class Service
         users = new List<User>();
         equipment = new List<Equipment>();
         rents = new List<Rent>();
+        RentsArchive = new List<Rent>();
     }
     public List<Equipment> GetRentedEquipment()
     {
@@ -107,69 +108,61 @@ public class Service
             return;
         }
 
-        Rent r = new Rent(foundUser, rentalDate, foundEquipment);
-        r.ReturnDate =  returnDate;
+        Rent r;
+        if (rents.Count == 0)
+        {
+             r = new Rent( 0 ,foundUser, rentalDate, foundEquipment);
+        }
+        else
+        {
+             r = new Rent( rents[ rents.Count - 1].id +1 ,foundUser, rentalDate, foundEquipment );
+        }
+        
+        r.ReturnDate = returnDate;
         rents.Add(r);
         foundUser.currRented += 1;
        foundEquipment.IsRented = true;
-        Console.WriteLine($"Pomyślnie wypożyczono '{foundEquipment}' dla {foundUser}");
+        Console.WriteLine($"Pomyślnie wypożyczono '{foundEquipment}' dla {foundUser}, wypożyczenie ma id: " + r.id);
     }
 
-    public void returnEquipment(int personId, int itemId, DateTime currDate)
-{
-    
-    Rent activeRent = null;
-    
-    foreach (var rent in rents)
+    public void returnEquipment(int id, DateTime currDate)
     {
-        if (rent.user.getId() == personId && 
-            rent.rentedEquipment.GetId() == itemId && 
-            !rent.IsReturned())
+        Rent activeRent = null;
+        foreach (var rent in rents)
         {
-            activeRent = rent;
-            break;
+            if (rent.id == id)
+            {
+                activeRent = rent;
+                break;
+            }
+        }
+        if (activeRent == null)
+        {
+            Console.WriteLine($"Nie znaleziono aktywnego wypożyczenia o ID: {id}");
+            return;
+        }
+    
+       
+    
+        if (currDate < activeRent.RentDate)
+        {
+            Console.WriteLine("Błąd: Data zwrotu nie może być wcześniejsza niż data wypożyczenia");
+            return;
+        }
+        RentsArchive.Add(activeRent);
+        activeRent.rentedEquipment.IsRented = false;
+        activeRent.user.currRented--;
+        rents.Remove(activeRent);
+        
+        float m = activeRent.price(currDate);
+        if (m == 0)
+        {
+            Console.WriteLine("Zwrot dokonany pomyślnie");
+        }
+        else
+        {
+            Console.WriteLine($"Zwrot dokonany, należy zapłacić {m}");
         }
     }
-    if (activeRent == null)
-    {
-        Console.WriteLine($"Nie znaleziono aktywnego wypożyczenia dla użytkownika ID: {personId} i sprzętu ID: {itemId}");
-        return;
-    }
-    
-    if (currDate < activeRent.RentDate)
-    {
-        Console.WriteLine("Błąd: Data zwrotu nie może być wcześniejsza niż data wypożyczenia");
-        return;
-    }
-    RentsArchive.Add(activeRent);
-    foreach (var e in equipment)
-    {
-        if (e.GetId() == itemId)
-        {
-            e.IsRented = false;
-            break;
-        }
-    }
-    foreach (var u in users)
-    {
-        if (u.getId() == personId)
-        {
-            u.currRented--;
-        }
-    }
-    rents.Remove(activeRent);
-    float m = activeRent.ReturnEquipment(currDate);
-    if (m == 0)
-    {
-        Console.WriteLine("Zwrot dokonany pomyślnie");
-    }
-    else
-    {
-        Console.WriteLine($"Zwrot dokonany, należy zapłacić {m}");
-    }
-   
-    
-    
-}
     
 }

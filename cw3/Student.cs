@@ -6,8 +6,9 @@ public class Student : User
     private String major { get; set; }
     
     public Student(string name, string surname, int id,  int year, String major) 
-        : base(name, surname, id)  
+        : base(name, surname, id)
     {
+        this.maxRented = 2;
         this.year = year;
         this.major = major;
     }

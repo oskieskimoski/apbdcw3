@@ -6,6 +6,7 @@ public class Employee : User
     public Employee (string name, string surname, int id, String job) 
     : base(name, surname, id)
     {
+        this.maxRented = 5;
         this.job = job;
     }
 
