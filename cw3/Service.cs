@@ -3,40 +3,64 @@ namespace cw3;
 public class Service
 {
 
-    private List<User> users;
-    private List<Equipment> equipment;
-    private List<Rent> rents;
+    public List<User> users { get; }
+    public List<Equipment> equipment { get; }
+    public List<Rent> rents { get; }
+
     public Service()
     {
-        
+        users = new List<User>();
+        equipment = new List<Equipment>();
+        rents = new List<Rent>();
     }
     public List<Equipment> GetRentedEquipment()
     {
         return equipment;
     }
-    public void AddEmployee(string name, string surname, int id, String job)
+    public void addEmployee(string name, string surname, int id, String job)
     {
         users.Add(new Employee(name, surname, id, job) );
         
     }
-    public void AddStudent(string name, string surname, int id,  int year, String major)
+    public void addStudent(string name, string surname, int id,  int year, String major)
     {
         users.Add(new Student(name, surname, id, year, major));
     }
-    public void AddLaptop(float pricePerDayPunish, int id, String cpuModel, float screeeSize ){
+    public void addLaptop(float pricePerDayPunish,  String cpuModel, float screeeSize ){
+
+        if (equipment.Count == 0)
+        {
+            equipment.Add(new Laptop(pricePerDayPunish, 0, cpuModel, screeeSize));
+        }
+        else
+        {
+            equipment.Add(new Laptop(pricePerDayPunish, equipment[equipment.Count-1].GetId() + 1, cpuModel, screeeSize));
+        }
+    }
+
+    public void addCamera( float pricePerDayPunish,  String model, String lens)
+    {
+        if (equipment.Count == 0)
+        {
+            equipment.Add(new Camera(pricePerDayPunish,   0, model, lens));
+        }
+        else
+        {
+            equipment.Add(new Camera(pricePerDayPunish,   equipment[equipment.Count-1].GetId() + 1, model, lens));   
+        }
         
-        equipment.Add(new Laptop(pricePerDayPunish, equipment[equipment.Count-1].GetId() + 1, cpuModel, screeeSize));
-    }
-
-    public void addCamera( float pricePerDayPunish, int id, String model, String lens)
+    } public void addProjektor( float pricePerDayPunish,  int resolution, bool batery )
     {
-       equipment.Add(new Camera(pricePerDayPunish,   equipment[equipment.Count-1].GetId() + 1, model, lens));
+        if (equipment.Count == 0)
+        {
+            equipment.Add(new Projector(pricePerDayPunish,  0, resolution, batery));
+        }
+        else
+        {
+            equipment.Add(new Projector(pricePerDayPunish, equipment[equipment.Count - 1].GetId() + 1, resolution,
+                batery));
+        }
     }
-    public void addProjektor( float pricePerDayPunish, int id, int resolution, bool batery )
-    {
-        equipment.Add(new Projector(pricePerDayPunish, equipment[equipment.Count-1].GetId() + 1, resolution, batery));
-    }
-
     public void Rent(int personId, int itemId, DateTime rentalDate, DateTime returnDate)
     {
         User foundUser = null;
@@ -86,4 +110,5 @@ public class Service
        foundEquipment.IsRented = true;
         Console.WriteLine($"Pomyślnie wypożyczono '{foundEquipment}' dla {foundUser}");
     }
+    
 }
