@@ -3,7 +3,7 @@ namespace cw3;
 public class Employee : User
 {
     private String job {get; set;}
-    public Employee (string name, string surname, int id, string studentId, int year, String job) 
+    public Employee (string name, string surname, int id, String job) 
     : base(name, surname, id)
     {
         this.job = job;
